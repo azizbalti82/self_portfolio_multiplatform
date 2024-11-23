@@ -15,6 +15,20 @@ enum Sections { About, Projects, Skills, Contact }
 GlobalKey<_HomeState> selected_section = GlobalKey<_HomeState>();
 String theme = 'light';
 
+
+// Navigation colors with defaults
+late Color about_nav_color;
+late Color projects_nav_color;
+late Color skills_nav_color;
+late Color contact_nav_color;
+
+//idk why the theme not worked as expected
+//so i'm getting the right colors manually
+late Color text_color;
+late Color primary_color;
+late Color card_color;
+
+
 //main function
 Future<void> openUrl(String url_string) async {
   final Uri url = Uri.parse(url_string);
@@ -34,46 +48,97 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+
+
 class _HomeState extends State<Home> {
   String _selected_section = Sections.About.name;
   ThemeMode _themeMode = ThemeMode.light; // Default theme is light
 
-  // Declare colors without initial values
-  late Color about_nav_color;
-  late Color projects_nav_color;
-  late Color skills_nav_color;
-  late Color contact_nav_color;
+
+
+  @override
+  void initState() {
+    super.initState();
+    if(_themeMode == ThemeMode.light) {
+      text_color = const Color(0xff1c1c1c);
+      primary_color = const Color(0xff6750c5);
+      card_color = const Color(0xfff3f3f3);
+    }else{
+      text_color = const Color(0xffd3d3d3);
+      primary_color = const Color(0xff9a78ef);
+      card_color = const Color(0xff444444);
+    }
+    // Initialize navigation colors
+    about_nav_color = primary_color;
+    projects_nav_color = text_color;
+    skills_nav_color = text_color;
+    contact_nav_color = text_color;
+  }
+
+  Widget getSectionWidget() {
+    if (_selected_section == Sections.About.name) {
+      return About();
+    } else if (_selected_section == Sections.Projects.name) {
+      return Projects();
+    } else if (_selected_section == Sections.Skills.name) {
+      return Skills();
+    } else if (_selected_section == Sections.Contact.name) {
+      return Contact();
+    } else {
+      return About();
+    }
+  }
 
   void toggleTheme() {
     setState(() {
-      if(_themeMode == ThemeMode.light){
+      if (_themeMode == ThemeMode.light) {
         _themeMode = ThemeMode.dark;
         theme = 'dark';
-      }else{
+        //update colors
+        text_color = const Color(0xffd3d3d3);
+        primary_color = const Color(0xff9a78ef);
+        card_color = const Color(0xff444444);
+      } else {
         _themeMode = ThemeMode.light;
         theme = 'light';
+        //update colors
+        text_color = const Color(0xff1c1c1c);
+        primary_color = const Color(0xff6750c5);
+        card_color = const Color(0xfff3f3f3);
       }
 
+      // Update navigation colors when theme changes
+      about_nav_color = text_color;
+      projects_nav_color = text_color;
+      skills_nav_color = text_color;
+      contact_nav_color = text_color;
+      if (_selected_section == Sections.About.name) {
+        about_nav_color = primary_color;
+      } else if (_selected_section == Sections.Projects.name) {
+        projects_nav_color = primary_color;
+      } else if (_selected_section == Sections.Skills.name) {
+        skills_nav_color = primary_color;
+      } else if (_selected_section == Sections.Contact.name) {
+        contact_nav_color = primary_color;
+      }
     });
   }
 
   void navigate_to(String section) {
     setState(() {
-      // Reset all navigation colors to the default theme color for 'onSurface'
-      about_nav_color = Theme.of(context).colorScheme.onSurface;
-      projects_nav_color = Theme.of(context).colorScheme.onSurface;
-      skills_nav_color = Theme.of(context).colorScheme.onSurface;
-      contact_nav_color = Theme.of(context).colorScheme.onSurface;
-
-      // Set the color for the selected section
-      if (section == Sections.About.name) {
-        about_nav_color = Theme.of(context).colorScheme.primary;
-      } else if (section == Sections.Projects.name) {
-        projects_nav_color = Theme.of(context).colorScheme.primary;
-      } else if (section == Sections.Skills.name) {
-        skills_nav_color = Theme.of(context).colorScheme.primary;
-      } else if (section == Sections.Contact.name) {
-        contact_nav_color = Theme.of(context).colorScheme.primary;
+      // Update navigation colors when theme changes
+      about_nav_color = text_color;
+      projects_nav_color = text_color;
+      skills_nav_color = text_color;
+      contact_nav_color = text_color;
+      if (_selected_section == Sections.About.name) {
+        about_nav_color = primary_color;
+      } else if (_selected_section == Sections.Projects.name) {
+        projects_nav_color = primary_color;
+      } else if (_selected_section == Sections.Skills.name) {
+        skills_nav_color = primary_color;
+      } else if (_selected_section == Sections.Contact.name) {
+        contact_nav_color = primary_color;
       }
 
       _selected_section = section;
@@ -82,12 +147,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the navigation colors based on the theme
-    about_nav_color = Theme.of(context).colorScheme.primary;
-    projects_nav_color = Theme.of(context).colorScheme.onSurface;
-    skills_nav_color = Theme.of(context).colorScheme.onSurface;
-    contact_nav_color = Theme.of(context).colorScheme.onSurface;
-
     return MaterialApp(
       title: 'Portfolio',
       debugShowCheckedModeBanner: false,
@@ -101,9 +160,7 @@ class _HomeState extends State<Home> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 150,
-              ),
+              const SizedBox(width: 150),
               Row(
                 children: [
                   Section(color: about_nav_color, name: Sections.About.name, action: () {
@@ -125,19 +182,17 @@ class _HomeState extends State<Home> {
                   IconButton(
                     iconSize: 25,
                     icon: SvgPicture.asset(
-                      'assets/icons/dark_mode.svg',
+                      _themeMode == ThemeMode.light?'assets/icons/dark_mode.svg':'assets/icons/light.svg',
                       width: 23.0,
                       height: 23.0,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: text_color,
                     ),
                     tooltip: 'Dark/Light mode',
                     onPressed: toggleTheme,
-
                   ),
-                  SizedBox(width: 15,),
-                  OutlinedButton.icon(
-                    onPressed: () async{
-                      // Open CV in Drive:
+                  const SizedBox(width: 15),
+                  ElevatedButton.icon(
+                    onPressed: () async {
                       String url = "https://drive.google.com/file/d/1nJEOp0E15tc-a1A7wO9YCq3rszUTYA7r/view?usp=sharing";
                       await openUrl(url);
                     },
@@ -145,12 +200,18 @@ class _HomeState extends State<Home> {
                       'assets/icons/cv.svg',
                       width: 16.0,
                       height: 16.0,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: text_color,
                     ),
-                    label: const Text("Show cv"),
+                    label: Text(
+                      "Show cv",
+                      style: TextStyle(
+                        color: text_color,
+                      ),
+                    ),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                      foregroundColor: Theme.of(context).colorScheme.onSurface,
+                      backgroundColor: card_color,
+                      side: BorderSide.none,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7.0),
                       ),
@@ -162,27 +223,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: Align(
-          alignment: Alignment.topCenter, // Centers horizontally and keeps vertical alignment as it is
+          alignment: Alignment.topCenter,
           child: getSectionWidget(),
         ),
       ),
     );
   }
-
-  Widget getSectionWidget() {
-    if (_selected_section == Sections.About.name) {
-      return About();
-    } else if (_selected_section == Sections.Projects.name) {
-      return Projects();
-    } else if (_selected_section == Sections.Skills.name) {
-      return Skills();
-    } else if (_selected_section == Sections.Contact.name) {
-      return Contact();
-    } else {
-      return About();
-    }
-  }
 }
+
 class Section extends StatelessWidget {
   Section({super.key, required this.name, required this.action, required this.color});
   String name;

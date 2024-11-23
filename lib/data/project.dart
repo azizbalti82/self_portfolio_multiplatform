@@ -10,7 +10,7 @@ List<Map<String, dynamic>> projects = [
     "title": "Self Portfolio",
     "types": ["web","mobile"],
     "image": "assets/images/project_portfolio.png",
-    "url": "https://github.com/azizbalti82/self_portfolio_multiplatform",
+    "url": "https://github.com/azizbalti82/self_portfolio_multiplatform/tree/master",
     "in_progress": true,
   },
   {

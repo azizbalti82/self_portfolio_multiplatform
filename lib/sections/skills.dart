@@ -17,12 +17,12 @@ class Skills extends StatelessWidget {
             Text(
               'Languages',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Wrap(
               spacing: 2, // Horizontal space between items
               runSpacing: 2, // Vertical space between rows
@@ -42,13 +42,13 @@ class Skills extends StatelessWidget {
             Text(
               'Mobile dev',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Wrap(
               spacing: 2, // Horizontal space between items
               runSpacing: 2, // Vertical space between rows
@@ -67,13 +67,13 @@ class Skills extends StatelessWidget {
             Text(
               'Web scraping',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Wrap(
               spacing: 2, // Horizontal space between items
               runSpacing: 2, // Vertical space between rows
@@ -89,13 +89,13 @@ class Skills extends StatelessWidget {
             Text(
               'Backend',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Wrap(
               spacing: 2, // Horizontal space between items
               runSpacing: 2, // Vertical space between rows
@@ -115,13 +115,13 @@ class Skills extends StatelessWidget {
             Text(
               'Features',
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Wrap(
               spacing: 2, // Horizontal space between items
               runSpacing: 2, // Vertical space between rows

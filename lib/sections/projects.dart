@@ -167,7 +167,7 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.surface,
+      color: Theme.of(context).colorScheme.surfaceContainer,
       elevation: 11,
       child: Container(
         width: 170,
@@ -224,6 +224,7 @@ class ProjectCard extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             (url.isNotEmpty) ? OutlinedButton.icon(
               onPressed: () async {
                 await openUrl(url);
@@ -239,7 +240,7 @@ class ProjectCard extends StatelessWidget {
               ),),
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
                 foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 side: BorderSide.none,
                 shape: RoundedRectangleBorder(
@@ -252,7 +253,7 @@ class ProjectCard extends StatelessWidget {
               },
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
                 foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 side: BorderSide.none,
                 shape: RoundedRectangleBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:personal_portfolio/theme/dark.dart';
 
 import '../main.dart';
 
@@ -36,25 +37,30 @@ class About extends StatelessWidget {
                         "Computer science student & Mobile developer.",
                         style: TextStyle(
                           fontSize: 17,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: 25),
                       OutlinedButton.icon(
                         onPressed: () {
                           selected_section.currentState?.navigate_to(Sections.Projects.name);  // Call the method of the Home class to navigate
+                          // Update navigation colors when theme changes
+                          about_nav_color = text_color;
+                          projects_nav_color = primary_color;
+                          skills_nav_color = text_color;
+                          contact_nav_color = text_color;
                         },
                         icon: SvgPicture.asset(
                           'assets/icons/code.svg',
                           width: 20.0,
                           height: 20.0,
-                          color: Theme.of(context).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.onPrimary
                         ),
                         label: const Text("See Projects"),
                         style: OutlinedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                           backgroundColor: Theme.of(context).colorScheme.primary,
-                          foregroundColor: Theme.of(context).colorScheme.surface,
+                          foregroundColor: Theme.of(context).colorScheme.onPrimary,
                           side: BorderSide.none,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -86,7 +92,7 @@ class About extends StatelessWidget {
               Text(
                 'Professional Experiences',
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -97,7 +103,7 @@ class About extends StatelessWidget {
               Text(
                 'Education',
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -132,7 +138,7 @@ class About extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontSize: 26,
+            fontSize: 22,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -250,6 +256,7 @@ class buildEducation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0), // Adjust the radius
           side: BorderSide(
