@@ -133,7 +133,7 @@ class Projects_state extends State<Projects> {
                       ) ,
                     ) :Wrap(
                   spacing: 35, // Horizontal space between items
-                  runSpacing: 25, // Vertical space between rows
+                  runSpacing: 40, // Vertical space between rows
                   alignment: WrapAlignment.start, // Align items at the start
                   children: projects
                       .where((project) => selected_filter == 'all' || project['types'].contains(selected_filter))
@@ -168,9 +168,9 @@ class ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.surfaceContainer,
-      elevation: 11,
+      elevation: 5,
       child: Container(
-        width: 170,
+        width: 190,
         margin: EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min, // Ensures the card size adapts to content
